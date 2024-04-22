@@ -15,3 +15,5 @@ public interface IGenericRepository<T>
     void Delete(T entity);
     void RemoveRange(IEnumerable<T> entities);
 }
+
+
