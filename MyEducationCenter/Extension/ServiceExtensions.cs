@@ -54,6 +54,10 @@ public static class ServiceExtensions
             };
         });
     }
+    public static void AddScopedServiceCollections(this IServiceCollection services, IConfiguration configuration)
+    {
+       
+    }
 
 }
 
