@@ -89,4 +89,9 @@ public partial class User
     [ForeignKey("UserTypeId")]
     [InverseProperty("Users")]
     public virtual UserType? UserType { get; set; }
+
+    public bool IsValidPassword(string password)
+    {
+        return password == Password;
+    }
 }
