@@ -59,6 +59,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IOrganizationService, OrganizationService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IRoleModuleService, RoleModuleService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

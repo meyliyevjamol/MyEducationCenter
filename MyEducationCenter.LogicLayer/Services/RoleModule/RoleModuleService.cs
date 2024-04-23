@@ -9,16 +9,13 @@ namespace MyEducationCenter.LogicLayer;
 public class RoleModuleService : IRoleModuleService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IAuthService _authService;
     private readonly AppDbContext _context;
 
     public RoleModuleService(
         IUnitOfWork repository,
-        IAuthService authService,
         AppDbContext context)
     {
         _unitOfWork = repository ?? throw new ArgumentNullException(nameof(repository));
-        _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         _context = context;
     }
 
