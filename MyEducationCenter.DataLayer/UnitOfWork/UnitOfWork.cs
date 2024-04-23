@@ -11,6 +11,10 @@ public class UnitOfWork:IUnitOfWork
 
     #region Repository
     private IOrganizationRepository _organizationRepository;
+    private IRoleRepository _roleRepository;
+
+    private IRoleModuleRepository _roleModuleRepository;
+    private IModuleRepository _moduleRepository;
     #endregion
 
 
@@ -28,6 +32,34 @@ public class UnitOfWork:IUnitOfWork
             if (_organizationRepository == null)
                 _organizationRepository = new OrganizationRepository(_context);
             return _organizationRepository;
+        }
+    }
+
+    public IRoleRepository RoleRepository
+    {
+        get
+        {
+            if (_roleRepository == null)
+                _roleRepository = new RoleRepository(_context);
+            return _roleRepository;
+        }
+    }
+    public IRoleModuleRepository RoleModuleRepository
+    {
+        get
+        {
+            if (_roleModuleRepository == null)
+                _roleModuleRepository = new RoleModuleRepository(_context);
+            return _roleModuleRepository;
+        }
+    }
+    public IModuleRepository ModuleRepository
+    {
+        get
+        {
+            if (_moduleRepository == null)
+                _moduleRepository = new ModuleRepository(_context);
+            return _moduleRepository;
         }
     }
 

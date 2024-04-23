@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace MyEducationCenter.DataLayer.Repositories.RoleModule
+using System.Linq.Expressions;
+
+namespace MyEducationCenter.DataLayer;
+
+public class RoleModuleRepository : GenericRepository<RoleModule>, IRoleModuleRepository
 {
-    internal class RoleModuleRepository
+    public RoleModuleRepository(AppDbContext dbContext) : base(dbContext)
     {
+    }
+
+    public override IQueryable<RoleModule> FindByConditionWithIncludes(Expression<Func<RoleModule, bool>> expression, bool trackChanges, params string[] includes)
+    {
+        includes = new[] { "Region", "District", "State" };
+        return base.FindByConditionWithIncludes(expression, trackChanges, includes);
     }
 }

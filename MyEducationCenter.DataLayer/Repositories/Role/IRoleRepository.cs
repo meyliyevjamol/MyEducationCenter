@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyEducationCenter.DataLayer.Repositories.Role
+﻿namespace MyEducationCenter.DataLayer;
+public interface IRoleRepository:IGenericRepository<Role>
 {
-    internal interface IRoleRepository
-    {
-    }
 }

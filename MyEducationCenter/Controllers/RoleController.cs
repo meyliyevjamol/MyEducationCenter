@@ -6,11 +6,11 @@ namespace MyEducationCenter.Controllers;
 
 [Route("[controller]/[action]")]
 [ApiController]
-public class OrganizationController : ControllerBase
+public class RoleController : ControllerBase
 {
-    private readonly IOrganizationService _service;
+    private readonly IRoleService _service;
 
-    public OrganizationController(IOrganizationService service)
+    public RoleController(IRoleService service)
     {
         _service = service;
     }
@@ -19,11 +19,11 @@ public class OrganizationController : ControllerBase
 
 
     [HttpPost]
-    public IActionResult GetList(OrganizationListFilterParams options)
+    public IActionResult GetList(RoleListFilterParams options)
     {
         try
         {
-            return Ok( _service.GetListAsync(options));
+            return Ok(_service.GetListAsync(options));
         }
         catch (Exception ex)
         {
@@ -48,11 +48,11 @@ public class OrganizationController : ControllerBase
 
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] OrganizationCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] RoleCreateDto dto)
     {
         try
         {
-            return Ok( await _service.CreateAsync(dto));
+            return Ok(await _service.CreateAsync(dto));
         }
         catch (Exception ex)
         {
@@ -63,7 +63,7 @@ public class OrganizationController : ControllerBase
 
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] OrganizationUpdateDto dto)
+    public async Task<IActionResult> Update([FromBody] RoleUpdateDto dto)
     {
         try
         {
@@ -90,6 +90,5 @@ public class OrganizationController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
 
 }

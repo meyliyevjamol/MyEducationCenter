@@ -14,6 +14,8 @@ public class OrganizationService : IOrganizationService
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+
+
     public async Task<int> CreateAsync(OrganizationCreateDto dto)
     {
         using (var transaction = _unitOfWork.BeginTransaction())
@@ -36,12 +38,15 @@ public class OrganizationService : IOrganizationService
             }
         }
     }
-
-    public Task DeleteAsync(int id)
+    public void DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var entity = _unitOfWork.OrganizationRepository.GetByExpression(s => s.Id == id);
+        if (entity == null)
+        {
+            throw new Exception(ErrorConst.NotFound<Organization>(id));
+        }
+        _unitOfWork.OrganizationRepository.Delete(entity);
     }
-
     public async Task<OrganizationDto> GetByIdAsync(int id)
     {
         var entity = _unitOfWork.OrganizationRepository.GetByExpression(s => s.Id == id);
@@ -51,7 +56,6 @@ public class OrganizationService : IOrganizationService
         }
         return _mapper.Map<OrganizationDto>(entity);
     }
-
     public PaginatedResult<OrganizationListDto> GetListAsync(OrganizationListFilterParams requestParameters)
     {
         return _unitOfWork.OrganizationRepository
@@ -61,9 +65,30 @@ public class OrganizationService : IOrganizationService
             .FilterList(requestParameters)
             .AsPagedResult(requestParameters);
     }
-
-    public Task<OrganizationUpdateDto> UpdateAsync(OrganizationUpdateDto dto)
+    public async Task<int> UpdateAsync(OrganizationUpdateDto dto)
     {
-        throw new NotImplementedException();
+        using (var transaction = _unitOfWork.BeginTransaction())
+        {
+            try
+            {
+                var entity = _unitOfWork.OrganizationRepository.GetByExpression(s => s.Id == dto.Id);
+
+                if (entity == null)
+                {
+                    throw new Exception(ErrorConst.NotFound<Organization>(dto.Id));
+                }
+
+                var returningContent = entity.Id;
+
+                await transaction.CommitAsync();
+
+                return returningContent;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
     }
 }

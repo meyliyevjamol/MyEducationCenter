@@ -58,6 +58,7 @@ public static class ServiceExtensions
     public static void AddScopedServiceCollections(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

@@ -9,6 +9,6 @@ public interface IOrganizationService
     PaginatedResult<OrganizationListDto> GetListAsync(OrganizationListFilterParams requestParameters);
     Task<OrganizationDto> GetByIdAsync(int id);
     Task<int> CreateAsync(OrganizationCreateDto dto);
-    Task<OrganizationUpdateDto> UpdateAsync(OrganizationUpdateDto dto);
-    Task DeleteAsync(int id);
+    Task<int> UpdateAsync(OrganizationUpdateDto dto);
+    void DeleteAsync(int id);
 }
