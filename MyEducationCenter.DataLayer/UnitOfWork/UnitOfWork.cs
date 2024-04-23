@@ -2,12 +2,17 @@
 
 namespace MyEducationCenter.DataLayer;
 
-public class UnitOfWork
+public class UnitOfWork:IUnitOfWork
 {
-    private AppDbContext _context;
+    public AppDbContext _context;
 
     private IDbContextTransaction _transaction;
     public IDbContextTransaction CurrentTransaction => _transaction;
+
+    #region Repository
+    private IOrganizationRepository _organizationRepository;
+    #endregion
+
 
     private readonly IServiceProvider _serviceProvider;
 
@@ -16,7 +21,15 @@ public class UnitOfWork
         _context = context;
         _serviceProvider = serviceProvider;
     }
-
+    public IOrganizationRepository OrganizationRepository
+    {
+        get
+        {
+            if (_organizationRepository == null)
+                _organizationRepository = new OrganizationRepository(_context);
+            return _organizationRepository;
+        }
+    }
 
     public IDbContextTransaction BeginTransaction()
     {

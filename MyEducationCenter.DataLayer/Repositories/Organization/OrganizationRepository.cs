@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace MyEducationCenter.DataLayer.Repositories.Organization
+
+
+using System.Linq.Expressions;
+
+namespace MyEducationCenter.DataLayer;
+
+public class OrganizationRepository : GenericRepository<Organization>, IOrganizationRepository
 {
-    internal class OrganizationRepository
+    public OrganizationRepository(AppDbContext dbContext) : base(dbContext)
     {
+    }
+
+  
+    public override IQueryable<Organization> FindByConditionWithIncludes(Expression<Func<Organization, bool>> expression, bool trackChanges, params string[] includes)
+    {
+        includes = new[] { "Region","District","State" };
+        return base.FindByConditionWithIncludes(expression, trackChanges, includes);
     }
 }

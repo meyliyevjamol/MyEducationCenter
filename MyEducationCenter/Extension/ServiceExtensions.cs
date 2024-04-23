@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MyEducationCenter.DataLayer;
 using MyEducationCenter.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MyEducationCenter.LogicLayer;
 
 namespace WoodWise.WebApi;
 
@@ -56,7 +57,11 @@ public static class ServiceExtensions
     }
     public static void AddScopedServiceCollections(this IServiceCollection services, IConfiguration configuration)
     {
-       
+        services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+        services.AddAutoMapper(typeof(OrganizationConfig));
     }
 
 }

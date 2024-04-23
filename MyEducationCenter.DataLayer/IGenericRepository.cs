@@ -14,6 +14,8 @@ public interface IGenericRepository<T>
     T Update(T entity);
     void Delete(T entity);
     void RemoveRange(IEnumerable<T> entities);
+
+    T? GetByExpression(Expression<Func<T, bool>> expression);
 }
 
 

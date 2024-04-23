@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using MyEducationCenter.LogicLayer;
 using WoodWise.WebApi;
 using yunin.systems.Extension;
 
@@ -36,7 +38,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
 });
 builder.Services.AddScopedServiceCollections(builder.Configuration);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

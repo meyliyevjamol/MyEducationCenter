@@ -27,7 +27,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return addedEntity;
     }
 
-    public IEnumerable<T> CreateRange(IEnumerable<T> entities)
+    public virtual IEnumerable<T> CreateRange(IEnumerable<T> entities)
     {
         dbContext.Set<T>().AddRange(entities);
         dbContext.SaveChanges();
@@ -35,23 +35,23 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return entities;
     }
 
-    public void RemoveRange(IEnumerable<T> entities)
+    public virtual void RemoveRange(IEnumerable<T> entities)
     {
         dbContext.RemoveRange(entities);
     }
 
-    public T Update(T entity) => dbContext.Set<T>().Update(entity).Entity;
+    public virtual T Update(T entity) => dbContext.Set<T>().Update(entity).Entity;
 
-    public void Delete(T entity) => dbContext.Set<T>().Remove(entity);
+    public virtual void Delete(T entity) => dbContext.Set<T>().Remove(entity);
 
-    public IQueryable<T> FindAll(bool trackChanges) =>
+    public virtual IQueryable<T> FindAll(bool trackChanges) =>
         !trackChanges ? dbContext.Set<T>().AsNoTracking() : dbContext.Set<T>();
 
-    public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
+    public virtual IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
         !trackChanges ? dbContext.Set<T>().Where(expression).AsNoTracking()
         : dbContext.Set<T>().Where(expression);
 
-    public IQueryable<T> FindByConditionWithIncludes(
+    public virtual IQueryable<T> FindByConditionWithIncludes(
         Expression<Func<T, bool>> expression,
         bool trackChanges,
         params string[] includes)
@@ -69,7 +69,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return query;
     }
 
-    public IQueryable<T> FindAllWithIncludes(
+    public virtual IQueryable<T> FindAllWithIncludes(
         bool trackChanges,
         params string[] includes)
     {
@@ -87,7 +87,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
 
-    public T Find(Expression<Func<T, bool>> expression) =>
+    public virtual T? GetByExpression(Expression<Func<T, bool>> expression) =>
         dbContext.Set<T>().FirstOrDefault(expression);
 }
 
