@@ -2,7 +2,7 @@
 
 namespace MyEducationCenter.DataLayer;
 
-public class UnitOfWork:IUnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
     public AppDbContext _context;
 
@@ -15,6 +15,8 @@ public class UnitOfWork:IUnitOfWork
 
     private IRoleModuleRepository _roleModuleRepository;
     private IModuleRepository _moduleRepository;
+    private IUserRoleRepository _userRoleRepository;
+    private IUserRepository _userRepository;
     #endregion
 
 
@@ -60,6 +62,25 @@ public class UnitOfWork:IUnitOfWork
             if (_moduleRepository == null)
                 _moduleRepository = new ModuleRepository(_context);
             return _moduleRepository;
+        }
+    }
+
+    public IUserRoleRepository UserRoleRepository
+    {
+        get
+        {
+            if (_userRoleRepository == null)
+                _userRoleRepository = new UserRoleRepository(_context);
+            return _userRoleRepository;
+        }
+    }
+    public IUserRepository UserRepository
+    {
+        get
+        {
+            if (_userRepository == null)
+                _userRepository = new UserRepository(_context);
+            return _userRepository;
         }
     }
 

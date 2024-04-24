@@ -15,7 +15,6 @@ public class RoleRepository : GenericRepository<Role>, IRoleRepository
 
     public override IQueryable<Role> FindByConditionWithIncludes(Expression<Func<Role, bool>> expression, bool trackChanges, params string[] includes)
     {
-       // includes = new[] { "RoleModule","Module"};
-        return base.FindByConditionWithIncludes(expression, trackChanges, includes);
+      return base.FindByConditionWithIncludes(expression, trackChanges, includes);
     }
 }

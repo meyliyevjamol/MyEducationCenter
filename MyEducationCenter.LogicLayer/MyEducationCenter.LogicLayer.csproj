@@ -20,4 +20,8 @@
     <ProjectReference Include="..\MyEducationCenter.DataLayer\MyEducationCenter.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\UserRole\" />
+  </ItemGroup>
+
 </Project>

@@ -67,7 +67,7 @@ public partial class User
     public int StateId { get; set; }
 
     [Column("user_type_id")]
-    public int? UserTypeId { get; set; }
+    public int UserTypeId { get; set; }
 
     [InverseProperty("User")]
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
