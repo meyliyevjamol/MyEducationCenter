@@ -6,6 +6,7 @@ using MyEducationCenter.DataLayer;
 using MyEducationCenter.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MyEducationCenter.LogicLayer;
+using MyEducationCenter.Logiclayer;
 
 namespace WoodWise.WebApi;
 
@@ -58,6 +59,8 @@ public static class ServiceExtensions
     public static void AddScopedServiceCollections(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IRoleModuleService, RoleModuleService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
