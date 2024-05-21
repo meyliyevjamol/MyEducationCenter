@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using MyEducationCenter.DataLayer.Repositories;
 
 namespace MyEducationCenter.DataLayer;
 
@@ -12,7 +13,7 @@ public class UnitOfWork : IUnitOfWork
     #region Repository
     private IOrganizationRepository _organizationRepository;
     private IRoleRepository _roleRepository;
-
+    private IDeletedRepository _deletedRepository;
     private IRoleModuleRepository _roleModuleRepository;
     private IModuleRepository _moduleRepository;
     private IUserRoleRepository _userRoleRepository;
@@ -27,6 +28,7 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
         _serviceProvider = serviceProvider;
     }
+
     public IOrganizationRepository OrganizationRepository
     {
         get
@@ -36,7 +38,6 @@ public class UnitOfWork : IUnitOfWork
             return _organizationRepository;
         }
     }
-
     public IRoleRepository RoleRepository
     {
         get
@@ -44,6 +45,15 @@ public class UnitOfWork : IUnitOfWork
             if (_roleRepository == null)
                 _roleRepository = new RoleRepository(_context);
             return _roleRepository;
+        }
+    }
+    public IDeletedRepository DeletedRepository
+    {
+        get
+        {
+            if (_deletedRepository == null)
+                _deletedRepository = new DeletedRepository(_context);
+            return _deletedRepository;
         }
     }
     public IRoleModuleRepository RoleModuleRepository
@@ -64,7 +74,6 @@ public class UnitOfWork : IUnitOfWork
             return _moduleRepository;
         }
     }
-
     public IUserRoleRepository UserRoleRepository
     {
         get
@@ -83,7 +92,6 @@ public class UnitOfWork : IUnitOfWork
             return _userRepository;
         }
     }
-
     public IDbContextTransaction BeginTransaction()
     {
         return _transaction = _context.Database.BeginTransaction();

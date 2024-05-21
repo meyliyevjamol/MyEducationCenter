@@ -1,10 +1,5 @@
 ﻿
 
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using MyEducationCenter.DataLayer;
-
 namespace MyEducationCenter.LogicLayer;
 
 public class OrganizationDto

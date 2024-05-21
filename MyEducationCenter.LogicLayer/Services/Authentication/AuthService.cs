@@ -60,7 +60,7 @@ public class AuthService : IAuthService
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
-
+   
     private SigningCredentials GetSigningCredentials()
     {
         var secretKey = _configuration.GetSection("JwtSettings:secretKey").Value;

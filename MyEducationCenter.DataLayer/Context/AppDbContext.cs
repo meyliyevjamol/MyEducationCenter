@@ -1,7 +1,4 @@
-﻿
-
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
 namespace MyEducationCenter.DataLayer;
 
 public partial class AppDbContext:DbContext
@@ -15,11 +12,22 @@ public partial class AppDbContext:DbContext
     {
     }
 
+
     public virtual DbSet<Country> Countries { get; set; }
+
+    public virtual DbSet<Course> Courses { get; set; }
+
+    public virtual DbSet<CourseType> CourseTypes { get; set; }
 
     public virtual DbSet<Currency> Currencies { get; set; }
 
+    public virtual DbSet<Deleted> Deleteds { get; set; }
+
+    public virtual DbSet<Direction> Directions { get; set; }
+
     public virtual DbSet<District> Districts { get; set; }
+
+    public virtual DbSet<DurationType> DurationTypes { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
 
@@ -54,6 +62,7 @@ public partial class AppDbContext:DbContext
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
     public virtual DbSet<UserType> UserTypes { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
